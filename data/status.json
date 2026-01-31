@@ -1,0 +1,149 @@
+{
+  "project": "suns0lver",
+  "version": "0.1.0",
+  "last_updated": "2025-01-31T00:00:00Z",
+  
+  "current_phase": {
+    "name": "forge_age",
+    "year_range": "2025-2032",
+    "description": "Build workshops, farms, energy systems, and computational foundations"
+  },
+  
+  "structural_guarantees": {
+    "non_extractive": true,
+    "voluntary_participation": true,
+    "exit_always_possible": true,
+    "stability_over_growth": true,
+    "capital_bounded": true,
+    "repairability_first": true
+  },
+  
+  "contribution_lanes": {
+    "coin": {
+      "status": "active",
+      "description": "Targeted support for specific tools and infrastructure"
+    },
+    "code": {
+      "status": "planned",
+      "description": "Documentation, tests, utilities, architecture improvements"
+    },
+    "ideas": {
+      "status": "planned",
+      "description": "Process improvements, tool designs, failure mode analysis"
+    }
+  },
+  
+  "active_builds": [
+    {
+      "id": "bbawc_workshop",
+      "name": "BBAWC Workshop Planning",
+      "domain": "BBAWC",
+      "status": "active",
+      "progress": 10
+    },
+    {
+      "id": "lathe_001",
+      "name": "Lathe #001 Funding",
+      "domain": "BBAWC/BBAWM",
+      "status": "active",
+      "progress": 0
+    },
+    {
+      "id": "portal_development",
+      "name": "Portal Development",
+      "domain": "Infrastructure",
+      "status": "active",
+      "progress": 75
+    }
+  ],
+  
+  "pcd_status": {
+    "coin_to_tool": {
+      "status": "in_progress",
+      "example": "Lathe #001",
+      "target_completion": "Q1 2025"
+    },
+    "code_to_merge": {
+      "status": "planned",
+      "example": null,
+      "target_completion": "Q2 2025"
+    },
+    "idea_to_implementation": {
+      "status": "planned",
+      "example": null,
+      "target_completion": "Q2 2025"
+    }
+  },
+  
+  "contributions": {
+    "coin": {
+      "total_count": 0,
+      "total_value_usd": 0,
+      "active_campaigns": ["lathe_001"]
+    },
+    "code": {
+      "total_prs": 0,
+      "merged_prs": 0,
+      "open_issues": 0
+    },
+    "ideas": {
+      "submitted": 0,
+      "implemented": 0,
+      "in_review": 0
+    }
+  },
+  
+  "domains": {
+    "BBAWC": {
+      "name": "Back-to-Basics Archaic Workshops (Carpentry)",
+      "status": "active",
+      "current_stage": 0,
+      "description": "Hand-tool carpentry, timber framing, foundational woodworking"
+    },
+    "BBAWM": {
+      "name": "Back-to-Basics Archaic Workshops (Metal)",
+      "status": "planning",
+      "current_stage": 0,
+      "description": "Metal forming, forging, basic metallurgy"
+    },
+    "SPANCL": {
+      "name": "Surface Precision Atomic Nanofab Chemistry Laboratory",
+      "status": "planning",
+      "current_stage": 0,
+      "description": "Materials research, composites, nanofabrication"
+    },
+    "MAM": {
+      "name": "Micro Assembly Mechanics",
+      "status": "planning",
+      "current_stage": 0,
+      "description": "Modular manufacturing, precision assembly"
+    },
+    "MIFF": {
+      "name": "Macro Infrastructural Fabrication Frameworks",
+      "status": "planning",
+      "current_stage": 0,
+      "description": "Heavy fabrication, failure analysis, stress testing"
+    },
+    "SKYFORGE": {
+      "name": "Heavy Fabrication & Infrastructure",
+      "status": "planning",
+      "current_stage": 0,
+      "description": "Large-scale fabrication, structural systems"
+    }
+  },
+  
+  "infrastructure": {
+    "hosting": "GitHub Pages",
+    "cdn": "Cloudflare",
+    "version_control": "Git",
+    "static_site": true,
+    "backend": null
+  },
+  
+  "metadata": {
+    "schema_version": "1.0.0",
+    "canonical_url": "https://suns0lver.github.io/data/status.json",
+    "update_frequency": "As changes occur",
+    "contact": "https://github.com/suns0lver/suns0lver.github.io/issues"
+  }
+}

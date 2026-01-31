@@ -1,0 +1,78 @@
+{
+  "wishlist": [
+    {
+      "id": "lathe_001",
+      "title": "Suns0lver Foundational Lathe #001",
+      "model": "PM-1022V (10\" × 22\") with AXA QCTP",
+      "category": "fabrication",
+      "domains": ["BBAWC", "BBAWM", "SPANCL", "MAM"],
+      "status": "funding",
+      "priority": "critical",
+      
+      "purpose": "A lathe is the 'machine that makes machines.' This is the first core fabrication anchor for BBAWC/BBAWM + early prototyping across SPANCL/MAM—shafts, bushings, spacers, fixtures, adapters, precision sleeves, tooling mods, repair parts, and small-run hardware.",
+      
+      "selection_rationale": {
+        "summary": "Maximum capability-per-footprint with minimal fragility",
+        "features": [
+          "1\" spindle bore (significant in this size class)",
+          "Infinitely variable spindle speed (50–2000 RPM) via DC brushless + belt drive",
+          "Power cross feed + carriage feed (production-capable, better finishes)",
+          "Quick-change spindle mount (fast, repeatable chuck swaps)",
+          "110V single-phase (workshop-friendly)",
+          "Community-validated fit/finish and features"
+        ]
+      },
+      
+      "cost": {
+        "machine": 3299,
+        "shipping": 249,
+        "liftgate": 79,
+        "total": 3627,
+        "currency": "USD"
+      },
+      
+      "funding": {
+        "target": 3627,
+        "raised": 0,
+        "currency": "USD",
+        "contributors": [],
+        "start_date": "2025-01-31",
+        "target_date": null
+      },
+      
+      "power_requirements": {
+        "voltage": "110V",
+        "phase": "single-phase",
+        "frequency": "60Hz",
+        "min_breaker": "12A"
+      },
+      
+      "success_evidence": [
+        "Contribution receipt (redacted for privacy)",
+        "Purchase receipt from vendor",
+        "Delivery proof (photo of crate + bench placement)",
+        "First chips: video or photo set (facing + turning a simple spacer)",
+        "Public acknowledgment of contributor"
+      ],
+      
+      "contribution_methods": [
+        "card",
+        "bank_transfer",
+        "crypto_btc",
+        "crypto_eth",
+        "crypto_usdc",
+        "crypto_xrp"
+      ],
+      
+      "page_url": "/wishlist/lathe-001.html",
+      "last_updated": "2025-01-31T00:00:00Z"
+    }
+  ],
+  
+  "metadata": {
+    "total_items": 1,
+    "total_value": 3627,
+    "currency": "USD",
+    "last_updated": "2025-01-31T00:00:00Z"
+  }
+}

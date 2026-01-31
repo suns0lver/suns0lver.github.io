@@ -1,0 +1,148 @@
+{
+  "proof_of_concepts": [
+    {
+      "id": "pcd_001",
+      "type": "coin_to_tool",
+      "name": "Lathe #001 Funding Campaign",
+      "status": "in_progress",
+      "start_date": "2025-01-31",
+      "completion_date": null,
+      
+      "description": "Demonstrate that coin contributions are earmarked, funds map to reality, and the loop closes with verifiable evidence.",
+      
+      "target": {
+        "tool": "PM-1022V Lathe with QCTP",
+        "cost_usd": 3627,
+        "domains": ["BBAWC", "BBAWM", "SPANCL", "MAM"]
+      },
+      
+      "evidence_checklist": [
+        {
+          "item": "Wish-list entry published",
+          "status": "complete",
+          "date": "2025-01-31"
+        },
+        {
+          "item": "First contribution received",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "Purchase receipt",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "Delivery proof",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "First chips video/photo",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "Contributor acknowledgment",
+          "status": "pending",
+          "date": null
+        }
+      ],
+      
+      "page_url": "/pcd/coin-tool.html"
+    },
+    {
+      "id": "pcd_002",
+      "type": "code_to_merge",
+      "name": "External Code Contribution",
+      "status": "planned",
+      "start_date": null,
+      "completion_date": null,
+      
+      "description": "Demonstrate that outside work is welcomed, reviewed fairly, and actually lands without gatekeeping.",
+      
+      "target": {
+        "task_type": "Documentation improvement or small utility",
+        "acceptance_criteria": "Clear, mergeable, adds value"
+      },
+      
+      "evidence_checklist": [
+        {
+          "item": "Task published publicly",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "External contributor submits PR",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "Review completed",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "PR merged with attribution",
+          "status": "pending",
+          "date": null
+        }
+      ],
+      
+      "page_url": "/pcd/code-merge.html"
+    },
+    {
+      "id": "pcd_003",
+      "type": "idea_to_implementation",
+      "name": "Idea Implementation with Attribution",
+      "status": "planned",
+      "start_date": null,
+      "completion_date": null,
+      
+      "description": "Demonstrate that ideas don't vanish, attribution is real, and intelligence is respected.",
+      
+      "target": {
+        "idea_type": "Workflow improvement, tool reorganization, or process simplification",
+        "implementation_time": "< 1 week"
+      },
+      
+      "evidence_checklist": [
+        {
+          "item": "Idea submission received",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "Public acknowledgment",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "Implementation completed",
+          "status": "pending",
+          "date": null
+        },
+        {
+          "item": "Attribution documented",
+          "status": "pending",
+          "date": null
+        }
+      ],
+      
+      "page_url": "/pcd/idea-implementation.html"
+    }
+  ],
+  
+  "summary": {
+    "total": 3,
+    "complete": 0,
+    "in_progress": 1,
+    "planned": 2
+  },
+  
+  "metadata": {
+    "schema_version": "1.0.0",
+    "last_updated": "2025-01-31T00:00:00Z",
+    "purpose": "Track proof-of-concept demonstrations that validate contribution loops"
+  }
+}

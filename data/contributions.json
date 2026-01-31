@@ -1,0 +1,33 @@
+{
+  "contributions": [],
+  
+  "summary": {
+    "coin": {
+      "total_count": 0,
+      "total_value_usd": 0,
+      "by_campaign": {
+        "lathe_001": {
+          "count": 0,
+          "value_usd": 0
+        }
+      }
+    },
+    "code": {
+      "total_prs": 0,
+      "merged_prs": 0,
+      "contributors": []
+    },
+    "ideas": {
+      "total_submissions": 0,
+      "implemented": 0,
+      "in_review": 0,
+      "contributors": []
+    }
+  },
+  
+  "metadata": {
+    "schema_version": "1.0.0",
+    "last_updated": "2025-01-31T00:00:00Z",
+    "privacy_note": "Contributor details are anonymized unless explicit permission given"
+  }
+}
