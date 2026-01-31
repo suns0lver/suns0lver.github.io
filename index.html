@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>suns0lver.net — Build Systems That Endure</title>
+    <meta name="description" content="Long-horizon regenerative infrastructure for food, energy, manufacturing, materials, and computation. Non-extractive. Voluntary. Built to last decades.">
+    <meta property="og:title" content="suns0lver.net — Build Systems That Endure">
+    <meta property="og:description" content="Long-horizon regenerative infrastructure. Non-extractive. Voluntary. Built to last decades.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://suns0lver.net">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="suns0lver.net — Build Systems That Endure">
+    <meta name="twitter:description" content="Long-horizon regenerative infrastructure. Non-extractive. Voluntary. Built to last decades.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0e14;
+            --bg-darker: #050810;
+            --bg-card: #151921;
+            --terminal-green: #00ff88;
+            --terminal-blue: #00d4ff;
+            --terminal-yellow: #ffcc00;
+            --terminal-red: #ff3366;
+            --terminal-purple: #b794f6;
+            --text-primary: #e6e8eb;
+            --text-secondary: #9ca3af;
+            --text-dim: #6b7280;
+            --border: #1f2937;
+            --border-bright: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated grid background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.4;
+            z-index: 0;
+            animation: gridFloat 30s linear infinite;
+        }
+
+        @keyframes gridFloat {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+
+        /* Glowing orbs in background */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--terminal-green);
+            top: 10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--terminal-blue);
+            top: 50%;
+            right: -10%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: var(--terminal-purple);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(20px, 30px) scale(1.05); }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0 4rem;
+            text-align: center;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--terminal-green);
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section headers */
+        h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            color: var(--terminal-yellow);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::before {
+            content: '>';
+            color: var(--terminal-green);
+            font-weight: bold;
+        }
+
+        h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            color: var(--terminal-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--border-bright);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Three Lanes Section */
+        .lanes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .lane-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-darker) 100%);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lane-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--lane-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lane-card:hover::before {
+            opacity: 1;
+        }
+
+        .lane-card:hover {
+            border-color: var(--lane-color);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .lane-card.coin { --lane-color: var(--terminal-green); }
+        .lane-card.code { --lane-color: var(--terminal-blue); }
+        .lane-card.ideas { --lane-color: var(--terminal-purple); }
+
+        .lane-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .lane-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            color: var(--lane-color);
+            margin-bottom: 1rem;
+        }
+
+        .lane-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--lane-color);
+            color: var(--bg-dark);
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--lane-color);
+            border: 2px solid var(--lane-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--lane-color);
+            color: var(--bg-dark);
+        }
+
+        /* Collapsible sections */
+        .collapsible {
+            margin: 2rem 0;
+        }
+
+        .collapsible-header {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .collapsible-header:hover {
+            border-color: var(--terminal-blue);
+        }
+
+        .collapsible-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            color: var(--terminal-blue);
+        }
+
+        .collapsible-icon {
+            font-size: 1.5rem;
+            color: var(--terminal-green);
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible.active .collapsible-icon {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible.active .collapsible-content {
+            max-height: 5000px;
+        }
+
+        .collapsible-inner {
+            padding: 2rem;
+            background: var(--bg-darker);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            background: var(--bg-darker);
+            border-radius: 8px;
+            overflow: hidden;
+            height: 30px;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--terminal-green), var(--terminal-blue));
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        /* Status badges */
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .status-active {
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
+        }
+
+        .status-planned {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid var(--terminal-blue);
+            color: var(--terminal-blue);
+        }
+
+        .status-complete {
+            background: rgba(183, 148, 246, 0.2);
+            border: 1px solid var(--terminal-purple);
+            color: var(--terminal-purple);
+        }
+
+        /* Lists */
+        ul, ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        li {
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        /* Domain tags */
+        .domain-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--terminal-blue);
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--terminal-blue);
+            margin-right: 0.5rem;
+        }
+
+        /* Highlight boxes */
+        .highlight-box {
+            background: rgba(0, 255, 136, 0.05);
+            border-left: 4px solid var(--terminal-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .highlight-box.warning {
+            background: rgba(255, 204, 0, 0.05);
+            border-left-color: var(--terminal-yellow);
+        }
+
+        .highlight-box.info {
+            background: rgba(0, 212, 255, 0.05);
+            border-left-color: var(--terminal-blue);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            margin-top: 6rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+
+        .infinity {
+            font-size: 2.5rem;
+            color: var(--terminal-green);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .lanes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Animation delays */
+        .lane-card:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.2s backwards; }
+        .lane-card:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.4s backwards; }
+        .lane-card:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.6s backwards; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section spacing */
+        section {
+            margin: 5rem 0;
+        }
+
+        /* Crypto addresses */
+        .crypto-address {
+            background: var(--bg-darker);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            margin: 0.5rem 0;
+        }
+
+        .crypto-label {
+            color: var(--terminal-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Evidence list */
+        .evidence-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .evidence-icon {
+            color: var(--terminal-green);
+            font-weight: bold;
+        }
+
+        /* Grid layouts */
+        .two-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1 class="logo">suns0lver</h1>
+            <p class="tagline">Build Systems That Endure</p>
+            <p class="subtitle">Long-horizon regenerative infrastructure. Non-extractive. Voluntary. Built to last decades.</p>
+        </header>
+
+        <!-- Three Lanes -->
+        <section id="participate">
+            <h2>How to Participate</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Participation is modular. You do not need permission.</p>
+            
+            <div class="lanes-grid">
+                <div class="lane-card coin">
+                    <div class="lane-icon">💰</div>
+                    <h3 class="lane-title">Coin</h3>
+                    <p class="lane-description">Contribute funds earmarked for specific tools or needs. Every contribution maps to a real acquisition or action.</p>
+                    <a href="#wish-list" class="btn" style="background: var(--terminal-green);">View Wish List</a>
+                </div>
+
+                <div class="lane-card code">
+                    <div class="lane-icon">⚙️</div>
+                    <h3 class="lane-title">Code</h3>
+                    <p class="lane-description">Contribute via clearly defined tasks: documentation, tests, utilities, architecture reviews.</p>
+                    <a href="#code-tasks" class="btn" style="background: var(--terminal-blue);">View Tasks</a>
+                </div>
+
+                <div class="lane-card ideas">
+                    <div class="lane-icon">💡</div>
+                    <h3 class="lane-title">Ideas</h3>
+                    <p class="lane-description">Propose improvements to tools or processes. Ideas are reviewed, implemented when viable, and attributed.</p>
+                    <a href="#submit-idea" class="btn" style="background: var(--terminal-purple);">Submit Idea</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5-Minute Brief (Collapsible) -->
+        <section id="brief">
+            <div class="collapsible active">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <h2 style="margin: 0;">The 5-Minute Brief</h2>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <h3>I. First Principles (Non-Negotiable)</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Suns0lver is constrained by structure, not slogans.</p>
+                        
+                        <div class="two-col">
+                            <div>
+                                <h4 style="color: var(--terminal-green); margin-bottom: 0.5rem;">✓ Non-extractive</h4>
+                                <p style="color: var(--text-secondary);">No dark patterns, surveillance monetization, or coercive economics</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--terminal-green); margin-bottom: 0.5rem;">✓ Voluntary participation</h4>
+                                <p style="color: var(--text-secondary);">Entry and exit are always allowed</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--terminal-green); margin-bottom: 0.5rem;">✓ Stability over speed</h4>
+                                <p style="color: var(--text-secondary);">Correctness and durability beat rapid growth</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--terminal-green); margin-bottom: 0.5rem;">✓ Bounded capital</h4>
+                                <p style="color: var(--text-secondary);">Capital is a tool, not a driver; no infinite-return pressure</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--terminal-green); margin-bottom: 0.5rem;">✓ Repairability first</h4>
+                                <p style="color: var(--text-secondary);">Tools, systems, and processes must be understandable and fixable</p>
+                            </div>
+                        </div>
+
+                        <div class="highlight-box" style="margin-top: 2rem;">
+                            <strong>These principles are enforced by design choices, not trust.</strong>
+                        </div>
+
+                        <h3 style="margin-top: 2rem;">II. What Is Being Built Now</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Suns0lver is already in an active build phase. Current work is organized into clear domains:</p>
+
+                        <div class="card">
+                            <h4 style="color: var(--terminal-blue); margin-bottom: 0.5rem;">🔨 BBAWC / BBAWM</h4>
+                            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.5rem;">Back-to-Basics Archaic Workshops (Carpentry & Metal)</p>
+                            <p style="color: var(--text-secondary);">Foundational workshops for hand-tool carpentry, timber framing, metal forming, and repairable tooling. Progressive stages from Stone Age → Reboot Advanced Automation.</p>
+                        </div>
+
+                        <div class="card">
+                            <h4 style="color: var(--terminal-blue); margin-bottom: 0.5rem;">⚗️ SPANCL</h4>
+                            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.5rem;">Surface Precision Atomic Nanofab Chemistry Laboratory</p>
+                            <p style="color: var(--text-secondary);">Materials research, composites, experimental fabrication, and lifecycle optimization. Atomic/nanoscale precision manufacturing.</p>
+                        </div>
+
+                        <div class="card">
+                            <h4 style="color: var(--terminal-blue); margin-bottom: 0.5rem;">⚙️ MAM</h4>
+                            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.5rem;">Micro Assembly Mechanics</p>
+                            <p style="color: var(--text-secondary);">Modular manufacturing systems, fixtures, assembly workflows, and documentation. Precision micro-scale fabrication and assembly.</p>
+                        </div>
+
+                        <div class="card">
+                            <h4 style="color: var(--terminal-blue); margin-bottom: 0.5rem;">🏗️ MIFF</h4>
+                            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.5rem;">Macro Infrastructural Fabrication Frameworks</p>
+                            <p style="color: var(--text-secondary);">Failure analysis, stress testing, durability modeling, and learning from breakage. Heavy fabrication and structural systems.</p>
+                        </div>
+
+                        <div class="card">
+                            <h4 style="color: var(--terminal-blue); margin-bottom: 0.5rem;">🔥 SKYFORGE</h4>
+                            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.5rem;">Heavy Fabrication & Infrastructure</p>
+                            <p style="color: var(--text-secondary);">Large-scale fabrication, structural systems, energy-aware construction, and infrastructure designed to last decades.</p>
+                        </div>
+
+                        <h3 style="margin-top: 2rem;">III. The Long View (50-Year Trajectory)</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Suns0lver is structured across five overlapping ages:</p>
+
+                        <ol style="color: var(--text-secondary);">
+                            <li><strong style="color: var(--terminal-green);">The Forge Age (2025–2032)</strong><br>Build workshops, farms, energy systems, and computational foundations.</li>
+                            <li><strong style="color: var(--terminal-green);">The Sovereign Age (2033–2040)</strong><br>Achieve food, energy, materials, and mobility autonomy.</li>
+                            <li><strong style="color: var(--terminal-green);">The Interplanetary Age (2040–2050)</strong><br>Expand to orbital infrastructure, space manufacturing, and mining.</li>
+                            <li><strong style="color: var(--terminal-green);">The Abundance Age (2050–2060)</strong><br>Continental-scale food, energy, and material provisioning.</li>
+                            <li><strong style="color: var(--terminal-green);">The Civilization Age (2060–2075)</strong><br>Multi-world logistics, long-duration habitats, and century-scale systems.</li>
+                        </ol>
+
+                        <div class="highlight-box info" style="margin-top: 2rem;">
+                            <strong>This trajectory is intentionally slow, layered, and resilient.</strong>
+                        </div>
+
+                        <h3 style="margin-top: 2rem;">IV. What This Is Not</h3>
+                        <ul style="color: var(--text-secondary);">
+                            <li>Not a hype vehicle</li>
+                            <li>Not a speculative token scheme</li>
+                            <li>Not a surveillance platform</li>
+                            <li>Not a charity theater</li>
+                            <li>Not an exit-driven startup</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem; color: var(--terminal-blue); font-weight: 500;">It is an infrastructure lineage.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proof-of-Concept Demonstrations -->
+        <section id="proof">
+            <h2>Proof Over Promises</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Suns0lver prefers evidence over vision statements. Here are three contribution loops we're actively demonstrating:</p>
+
+            <div class="two-col">
+                <div class="card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">💰</span>
+                        <div>
+                            <h4 style="color: var(--terminal-green); margin: 0;">Coin → Tool</h4>
+                            <p style="color: var(--text-dim); font-size: 0.9rem; margin: 0;">A funded tool acquired and put into use</p>
+                        </div>
+                    </div>
+                    <span class="status-badge status-active">IN PROGRESS</span>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">See Lathe #001 below for our first major proof-of-concept.</p>
+                </div>
+
+                <div class="card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">⚙️</span>
+                        <div>
+                            <h4 style="color: var(--terminal-blue); margin: 0;">Code → Merge</h4>
+                            <p style="color: var(--text-dim); font-size: 0.9rem; margin: 0;">External contribution reviewed and merged</p>
+                        </div>
+                    </div>
+                    <span class="status-badge status-planned">PLANNED</span>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">Task board opening soon for external contributors.</p>
+                </div>
+
+                <div class="card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">💡</span>
+                        <div>
+                            <h4 style="color: var(--terminal-purple); margin: 0;">Idea → Implementation</h4>
+                            <p style="color: var(--text-dim); font-size: 0.9rem; margin: 0;">Submitted idea implemented with attribution</p>
+                        </div>
+                    </div>
+                    <span class="status-badge status-planned">PLANNED</span>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">Idea submission form launching with portal.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <p style="margin: 0;"><strong>Each loop is small by design — and fully verifiable.</strong></p>
+                <p style="margin-top: 0.5rem; color: var(--text-secondary);">No promises. Just receipts.</p>
+            </div>
+        </section>
+
+        <!-- Wish List - Lathe #001 -->
+        <section id="wish-list">
+            <h2>Wish List — Lathe #001</h2>
+            
+            <div class="card" style="border: 2px solid var(--terminal-green);">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h3 style="color: var(--terminal-green); margin-bottom: 0.5rem;">Suns0lver Foundational Lathe #001</h3>
+                        <p style="color: var(--text-dim); margin: 0;">PM-1022V (10" × 22") with AXA QCTP</p>
+                        <div style="margin-top: 0.5rem;">
+                            <span class="domain-tag">BBAWC</span>
+                            <span class="domain-tag">BBAWM</span>
+                            <span class="domain-tag">SPANCL</span>
+                            <span class="domain-tag">MAM</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 2rem; font-family: 'JetBrains Mono', monospace; color: var(--terminal-green); font-weight: 700;">$3,627</div>
+                        <div style="color: var(--text-dim); font-size: 0.9rem;">Funding Target</div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-text">$0 of $3,627</div>
+                    <div class="progress-bar" style="width: 0%;">0%</div>
+                </div>
+
+                <h4 style="color: var(--terminal-blue); margin-top: 2rem; margin-bottom: 1rem;">Why This Tool Matters</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">A lathe is the "machine that makes machines." This is the first core fabrication anchor for BBAWC/BBAWM + early prototyping across SPANCL/MAM—shafts, bushings, spacers, fixtures, adapters, precision sleeves, tooling mods, repair parts, and small-run hardware.</p>
+
+                <h4 style="color: var(--terminal-blue); margin-top: 2rem; margin-bottom: 1rem;">Selection Rationale</h4>
+                <p style="color: var(--text-secondary);">The PM-1022V hits maximum capability-per-footprint with minimal fragility:</p>
+                <ul style="color: var(--text-secondary); margin-top: 0.5rem;">
+                    <li>1" spindle bore (significant in this size class)</li>
+                    <li>Infinitely variable spindle speed (50–2000 RPM) via DC brushless + belt drive</li>
+                    <li>Power cross feed + carriage feed (production-capable, better finishes)</li>
+                    <li>Quick-change spindle mount (fast, repeatable chuck swaps)</li>
+                    <li>110V single-phase (workshop-friendly)</li>
+                    <li>Community-validated fit/finish and features</li>
+                </ul>
+
+                <h4 style="color: var(--terminal-blue); margin-top: 2rem; margin-bottom: 1rem;">Cost Breakdown</h4>
+                <div style="background: var(--bg-darker); padding: 1rem; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="color: var(--text-secondary);">PM-1022V w/QCTP:</span>
+                        <span style="color: var(--terminal-green);">$3,299</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="color: var(--text-secondary);">Flat-rate shipping:</span>
+                        <span style="color: var(--terminal-green);">$249</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="color: var(--text-secondary);">Liftgate delivery:</span>
+                        <span style="color: var(--terminal-green);">$79</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); font-weight: 700;">
+                        <span style="color: var(--terminal-yellow);">TOTAL:</span>
+                        <span style="color: var(--terminal-yellow);">$3,627</span>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--terminal-blue); margin-top: 2rem; margin-bottom: 1rem;">Success Evidence (What You'll See)</h4>
+                <div class="evidence-item">
+                    <span class="evidence-icon">✓</span>
+                    <span style="color: var(--text-secondary);">Contribution receipt (redacted for privacy)</span>
+                </div>
+                <div class="evidence-item">
+                    <span class="evidence-icon">✓</span>
+                    <span style="color: var(--text-secondary);">Purchase receipt from vendor</span>
+                </div>
+                <div class="evidence-item">
+                    <span class="evidence-icon">✓</span>
+                    <span style="color: var(--text-secondary);">Delivery proof (photo of crate + bench placement)</span>
+                </div>
+                <div class="evidence-item">
+                    <span class="evidence-icon">✓</span>
+                    <span style="color: var(--text-secondary);">First chips: video or photo set (facing + turning a simple spacer)</span>
+                </div>
+                <div class="evidence-item">
+                    <span class="evidence-icon">✓</span>
+                    <span style="color: var(--text-secondary);">Public acknowledgment of contributor</span>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center;">
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Support via card, bank transfer, or cryptocurrency.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="#" class="btn" style="background: var(--terminal-green);">Contribute with Card</a>
+                        <a href="#crypto" class="btn btn-secondary" style="border-color: var(--terminal-green); color: var(--terminal-green);">Crypto Addresses</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Crypto Addresses -->
+        <section id="crypto" style="margin-top: 3rem;">
+            <h2>Cryptocurrency Addresses</h2>
+            <div class="highlight-box warning">
+                <strong>⚠️ Important:</strong> Send only the assets and networks listed below. Cryptocurrency transactions are final and cannot be reversed.
+            </div>
+
+            <div class="card">
+                <div style="margin-bottom: 1.5rem;">
+                    <div class="crypto-label">Bitcoin (BTC)</div>
+                    <div class="crypto-address">[BTC address will be inserted here]</div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div class="crypto-label">Ethereum (ETH)</div>
+                    <div class="crypto-address">[ETH address will be inserted here]</div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div class="crypto-label">USD Coin (USDC) - Ethereum Network</div>
+                    <div class="crypto-address">[USDC-ETH address will be inserted here]</div>
+                </div>
+
+                <div style="margin-bottom: 0;">
+                    <div class="crypto-label">Ripple (XRP)</div>
+                    <div class="crypto-address">[XRP address will be inserted here]</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Tasks -->
+        <section id="code-tasks">
+            <h2>Code Contributions</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">If you'd rather help by building, here's how to get started:</p>
+
+            <div class="card">
+                <h4 style="color: var(--terminal-blue); margin-bottom: 1rem;">Getting Started</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Code contributions follow a clear workflow:</p>
+                <ol style="color: var(--text-secondary);">
+                    <li><strong>Review available tasks</strong> in AGENT_TASKS.md</li>
+                    <li><strong>Propose your approach</strong> before implementing</li>
+                    <li><strong>Submit a pull request</strong> when ready</li>
+                    <li><strong>Receive review</strong> (collaborative, not adversarial)</li>
+                    <li><strong>Get merged</strong> with attribution</li>
+                </ol>
+
+                <div class="highlight-box info" style="margin-top: 1.5rem;">
+                    <p style="margin: 0;"><strong>For autonomous agents:</strong> Propose a plan first, then implement. We want to understand your approach before you invest time.</p>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <a href="#" class="btn" style="background: var(--terminal-blue);">View Task Board (Coming Soon)</a>
+                    <a href="#" class="btn btn-secondary" style="border-color: var(--terminal-blue); color: var(--terminal-blue); margin-left: 1rem;">Read CONTRIBUTING.md</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ideas Submission -->
+        <section id="submit-idea">
+            <h2>Submit an Idea</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Have an architecture improvement, design pattern, safety constraint, or workflow optimization?</p>
+
+            <div class="card">
+                <h4 style="color: var(--terminal-purple); margin-bottom: 1rem;">What Makes a Good Idea Submission</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Ideas that improve at least one of these qualities:</p>
+                <ul style="color: var(--text-secondary);">
+                    <li><strong>Longevity</strong> — Decades, not cycles</li>
+                    <li><strong>Repairability</strong> — No sealed or disposable logic</li>
+                    <li><strong>Material/Energy efficiency</strong></li>
+                    <li><strong>Safety</strong></li>
+                    <li><strong>Transparency of function</strong></li>
+                    <li><strong>Toolchain independence</strong></li>
+                    <li><strong>Manufacturability</strong> with modest infrastructure</li>
+                </ul>
+
+                <div class="highlight-box" style="margin-top: 1.5rem;">
+                    <p style="margin: 0;"><strong>Licensing:</strong> By submitting, you agree your idea may be used by Suns0lver with attribution when practical. Submission does not imply compensation or ownership.</p>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <a href="#" class="btn" style="background: var(--terminal-purple);">Open Idea Submission Form (Coming Soon)</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Dashboard -->
+        <section id="status">
+            <h2>Status Dashboard</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Current build state and active projects.</p>
+
+            <div class="two-col">
+                <div class="card">
+                    <h4 style="color: var(--terminal-green); margin-bottom: 1rem;">🔨 Active Builds</h4>
+                    <div style="margin-bottom: 0.5rem;">
+                        <span class="status-badge status-active">BBAWC Workshop Planning</span>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <span class="status-badge status-active">Lathe #001 Funding</span>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <span class="status-badge status-active">Portal Development</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4 style="color: var(--terminal-blue); margin-bottom: 1rem;">📋 Next Milestones</h4>
+                    <ul style="color: var(--text-secondary); margin: 0; padding-left: 1.5rem;">
+                        <li>Launch contribution portal</li>
+                        <li>Complete Lathe #001 funding</li>
+                        <li>Open task board for code contributors</li>
+                        <li>First PCD demonstrations</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4 style="color: var(--terminal-yellow); margin-bottom: 1rem;">📊 Contribution Stats</h4>
+                    <div style="font-family: 'JetBrains Mono', monospace;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: var(--text-secondary);">Coin contributions:</span>
+                            <span style="color: var(--terminal-green);">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: var(--text-secondary);">Code merges:</span>
+                            <span style="color: var(--terminal-green);">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-secondary);">Ideas implemented:</span>
+                            <span style="color: var(--terminal-green);">0</span>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-dim); font-size: 0.85rem; margin-top: 1rem; margin-bottom: 0;">Updated as contributions are received and processed.</p>
+                </div>
+
+                <div class="card">
+                    <h4 style="color: var(--terminal-purple); margin-bottom: 1rem;">🎯 Current Focus</h4>
+                    <p style="color: var(--text-secondary); margin: 0;">The Forge Age (2025-2032): Building foundational workshops, acquiring essential tooling, and establishing core infrastructure for BBAWC/BBAWM operations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing -->
+        <section id="closing" style="text-align: center; margin-top: 6rem;">
+            <h2 style="justify-content: center;">Final Note</h2>
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    Suns0lver does not ask for belief.<br>
+                    It asks for participation where it makes sense.
+                </p>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">If you care about:</p>
+                <ul style="color: var(--text-secondary); text-align: left; max-width: 400px; margin: 0 auto 1.5rem;">
+                    <li>Long-horizon reasoning</li>
+                    <li>Systems that don't eat themselves</li>
+                    <li>Tools that last</li>
+                    <li>Intelligence that can survive its own creations</li>
+                </ul>
+                <p style="color: var(--terminal-green); font-size: 1.2rem; font-weight: 600;">You're welcome here.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="infinity">♾️</div>
+            <p style="margin-top: 1rem; font-size: 1.1rem;">suns0lver.net</p>
+            <p style="margin-top: 0.5rem; color: var(--text-dim);">Build systems that endure.</p>
+            <p style="margin-top: 2rem; font-size: 0.9rem;">
+                Authority constrained by structure, not trust.
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim);">
+                <a href="/cdn-cgi/l/email-protection#04676b6a706567704477716a7734687261762a6a6170" style="color: var(--terminal-blue); text-decoration: none;"><span class="__cf_email__" data-cfemail="56353938223735221625233825663a20332478383322">[email&#160;protected]</span></a>
+            </p>
+        </footer>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Collapsible sections
+        function toggleCollapsible(header) {
+            const collapsible = header.parentElement;
+            collapsible.classList.toggle('active');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add subtle parallax to orbs
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+         
