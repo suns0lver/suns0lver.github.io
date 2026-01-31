@@ -1,3 +1,4 @@
+---
 name: Code Contribution
 about: Propose a code contribution (documentation, test, utility, or improvement)
 title: '[CODE] '
